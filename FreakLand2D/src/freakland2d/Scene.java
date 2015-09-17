@@ -10,6 +10,6 @@ package freakland2d;
  *
  * @author JuanManuel
  */
-public class Scene extends Figura{
-    
+public class Scene extends Figure{
+    private int sceneScore;
 }

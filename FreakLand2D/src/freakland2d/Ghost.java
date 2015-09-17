@@ -9,6 +9,7 @@ package freakland2d;
  *
  * @author Sebastian-PC
  */
-public abstract class  Figura {
-    
+public abstract class Ghost extends Figure {
+    protected int size; // Original size: 1
+    protected double rotationAngle;
 }

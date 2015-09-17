@@ -10,6 +10,6 @@ package freakland2d;
  *
  * @author JuanManuel
  */
-public class Player {
+public class Player extends Figure{
     
 }

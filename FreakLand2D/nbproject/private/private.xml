@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/JuanManuel/Google%20Drive/Universidad/Semestre%20V/Computación%20Grafica/Proyectos/yoMama/FreakLand2D/src/freakland2d/Player.java</file>
-            <file>file:/C:/Users/JuanManuel/Google%20Drive/Universidad/Semestre%20V/Computación%20Grafica/Proyectos/yoMama/FreakLand2D/src/freakland2d/Figura.java</file>
-            <file>file:/C:/Users/JuanManuel/Google%20Drive/Universidad/Semestre%20V/Computación%20Grafica/Proyectos/yoMama/FreakLand2D/src/freakland2d/Fantasma.java</file>
-            <file>file:/C:/Users/JuanManuel/Google%20Drive/Universidad/Semestre%20V/Computación%20Grafica/Proyectos/yoMama/FreakLand2D/src/freakland2d/Scene.java</file>
+            <file>file:/C:/Users/Sebastian-PC/Documents/Git/Computacion-Grafica/FreakLand2D/src/freakland2d/Ghost.java</file>
+            <file>file:/C:/Users/Sebastian-PC/Documents/Git/Computacion-Grafica/FreakLand2D/src/freakland2d/Player.java</file>
+            <file>file:/C:/Users/Sebastian-PC/Documents/Git/Computacion-Grafica/FreakLand2D/src/freakland2d/Figure.java</file>
+            <file>file:/C:/Users/Sebastian-PC/Documents/Git/Computacion-Grafica/FreakLand2D/src/freakland2d/Scene.java</file>
+            <file>file:/C:/Users/Sebastian-PC/Documents/Git/Computacion-Grafica/FreakLand2D/src/freakland2d/gui/PantallaDeInicio.java</file>
+            <file>file:/C:/Users/Sebastian-PC/Documents/Git/Computacion-Grafica/FreakLand2D/src/freakland2d/FreakLand2D.java</file>
         </group>
     </open-files>
 </project-private>
