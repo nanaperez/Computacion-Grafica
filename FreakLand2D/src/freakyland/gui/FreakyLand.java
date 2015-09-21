@@ -9,15 +9,25 @@ package freakyland.gui;
 import freakyland.Player;
 import freakyland.Scene;
 import freakyland.Phantom;
+import java.awt.AlphaComposite;
 import javax.swing.JLabel;
 import java.awt.Dimension;
 import java.awt.Font;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -154,19 +164,37 @@ public class FreakyLand extends javax.swing.JPanel implements java.awt.event.Key
                
                final JLabel phantomTemp = phantomsImg.get(i);
                if(phantoms.get(i).getType()==phantomTrap.getType()){
-                   //GG
-                   
-                   scene.addPoint();
-                   scoreBoard.setText(Integer.toString(scene.getScore()));
-                   //TODO: INCREASE SIZE OF GHOST
-                   phantomsImg.get(i).setSize(phantomTrap.getSizeX()*2, phantomTrap.getSizeY()*2);
-                   
+                   try {
+                       //GG
+                       
+                       scene.addPoint();
+                       scoreBoard.setText(Integer.toString(scene.getScore()));
+                       //TODO: INCREASE SIZE OF GHOST
+                       //phantomsImg.get(i).setSize(phantomTrap.getSizeX()*2, phantomTrap.getSizeY()*2);
+                       BufferedImage myPicture = ImageIO.read(getClass().getResource(phantoms.get(i).getImg()));
+                       
+                       phantomsImg.get(i).setIcon(new ImageIcon(resizeToBig(myPicture, 400, 400)));
+                       //phantomsImg.get(i).setLocation(WIDTH/2, HEIGHT/2);
+
+                       //validate();
+                       //repaint();
+                   } catch (IOException ex) {
+                       Logger.getLogger(FreakyLand.class.getName()).log(Level.SEVERE, null, ex);
+                   }
                } else {
                    //LOL N00B
                    
                    scene.deductPoint();
                    scoreBoard.setText(Integer.toString(scene.getScore()));
                    //TODO: DECREASE SIZE OF GHOST
+                   BufferedImage myPicture;
+                   try {
+                       myPicture = ImageIO.read(getClass().getResource(phantoms.get(i).getImg()));
+                       phantomsImg.get(i).setIcon(new ImageIcon(resizeToBig(myPicture, 50, 50)));
+                   } catch (IOException ex) {
+                       Logger.getLogger(FreakyLand.class.getName()).log(Level.SEVERE, null, ex);
+                   }
+                       
                }
                
                new java.util.Timer().schedule( 
@@ -193,6 +221,25 @@ public class FreakyLand extends javax.swing.JPanel implements java.awt.event.Key
         
     }
     
+    private Image resizeToBig(Image originalImage, int biggerWidth, int biggerHeight) {
+    int type = BufferedImage.TYPE_INT_ARGB;
+
+
+    BufferedImage resizedImage = new BufferedImage(biggerWidth, biggerHeight, type);
+    Graphics2D g = resizedImage.createGraphics();
+
+    g.setComposite(AlphaComposite.Src);
+    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+    g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+    g.drawImage(originalImage, 0, 0, biggerWidth, biggerHeight, this);
+    g.dispose();
+
+
+    return resizedImage;
+}
+    
     public void startGame(){
         showMessage();
     }
@@ -216,15 +263,7 @@ public class FreakyLand extends javax.swing.JPanel implements java.awt.event.Key
         repaint();
     }
     
-    private void firstStage(){
-        
-        while(score < 100 && score > 0 ){
-        Phantom phantomx = new Phantom();
-        String imgPath = phantomx.randomizePhantom();
-        phantomx.setImgIcon(imgPath); 
-            
-        }
-    }
+
     
     private void spawnPhantom(){
         phantom = new Phantom();
@@ -252,6 +291,10 @@ public class FreakyLand extends javax.swing.JPanel implements java.awt.event.Key
                 
                 phantoms.get(j).fall();
                 phantomsImg.get(j).setLocation(phantoms.get(j).getPosX(), phantoms.get(j).getPosY());
+                if(phantomsImg.get(j).getY() >= HEIGHT){
+                    phantomsImg.remove(j);
+                    phantoms.remove(j);
+                }
             }
         }
         i=i+1;
