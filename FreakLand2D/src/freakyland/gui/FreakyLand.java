@@ -20,6 +20,8 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -76,9 +78,9 @@ public class FreakyLand extends javax.swing.JPanel implements java.awt.event.Key
         player.setHitBoxY(playerHitBoxY); //SET HITBOX
         playerImg = new JLabel();
         playerImg.setIcon(new javax.swing.ImageIcon(getClass().getResource(
-            player.getImgIcon())));
+        player.getImgIcon())));
         playerImg.setPreferredSize(new Dimension(150, 150));
-                player.setPosX(WIDTH/2);
+        player.setPosX(WIDTH/2);
         player.setPosY(HEIGHT - 200);
         playerImg.setLocation(player.getPosX(), player.getPosY());
         
@@ -108,9 +110,7 @@ public class FreakyLand extends javax.swing.JPanel implements java.awt.event.Key
         frame.setFocusable(true);
         frame.addKeyListener(panel);
         frame.setResizable(false);
-        frame.setVisible(true);
-        
-        
+        frame.setVisible(true);     
         panel.startGame();
     }
 
@@ -144,7 +144,7 @@ public class FreakyLand extends javax.swing.JPanel implements java.awt.event.Key
        super.paintComponent(g); 
        g.drawImage(backgr.getImage(), 0, 0, null);
        
-       check = Math.abs(rn.nextInt())%500;
+       check = Math.abs(rn.nextInt())%700;
        
        if(check==0){
             spawnPhantom();
@@ -157,8 +157,6 @@ public class FreakyLand extends javax.swing.JPanel implements java.awt.event.Key
        for(int i = 0; i<phantomsImg.size();i++){
            phantomPosX = phantoms.get(i).getPosX();
            phantomPosY = phantoms.get(i).getPosY();
-           
-           
            if(Math.abs(playerPosX - phantomPosX)<=player.getHitBoxX()
                    && Math.abs(playerPosY - phantomPosY)<=player.getHitBoxY()){
                
@@ -187,14 +185,14 @@ public class FreakyLand extends javax.swing.JPanel implements java.awt.event.Key
                    scene.deductPoint();
                    scoreBoard.setText(Integer.toString(scene.getScore()));
                    //TODO: DECREASE SIZE OF GHOST
-                   BufferedImage myPicture;
+                   /*BufferedImage myPicture;
                    try {
                        myPicture = ImageIO.read(getClass().getResource(phantoms.get(i).getImg()));
                        phantomsImg.get(i).setIcon(new ImageIcon(resizeToBig(myPicture, 50, 50)));
                    } catch (IOException ex) {
                        Logger.getLogger(FreakyLand.class.getName()).log(Level.SEVERE, null, ex);
                    }
-                       
+                     */  
                }
                
                new java.util.Timer().schedule( 
@@ -224,20 +222,18 @@ public class FreakyLand extends javax.swing.JPanel implements java.awt.event.Key
     private Image resizeToBig(Image originalImage, int biggerWidth, int biggerHeight) {
     int type = BufferedImage.TYPE_INT_ARGB;
 
-
-    BufferedImage resizedImage = new BufferedImage(biggerWidth, biggerHeight, type);
-    Graphics2D g = resizedImage.createGraphics();
-
-    g.setComposite(AlphaComposite.Src);
-    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-    g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-    g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-    g.drawImage(originalImage, 0, 0, biggerWidth, biggerHeight, this);
-    g.dispose();
-
-
-    return resizedImage;
+BufferedImage resizedImage = new BufferedImage(biggerWidth, biggerHeight, type);
+	Graphics2D g = resizedImage.createGraphics();
+	g.drawImage(originalImage, 0, 0, biggerWidth,  biggerHeight, null);
+	g.dispose();	
+	g.setComposite(AlphaComposite.Src);
+	g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+	RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+	g.setRenderingHint(RenderingHints.KEY_RENDERING,
+	RenderingHints.VALUE_RENDER_QUALITY);
+	g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+	RenderingHints.VALUE_ANTIALIAS_ON);
+	return resizedImage;
 }
     
     public void startGame(){
@@ -290,18 +286,44 @@ public class FreakyLand extends javax.swing.JPanel implements java.awt.event.Key
             for(int j = 0; j<phantomsImg.size();j++){
                 
                 phantoms.get(j).fall();
+               if(i % 800 == 0){
+                    phantoms.get(j).setDegrees((phantoms.get(j).getDegrees()+ 45)% 360);
+                    
+                int rot = phantoms.get(j).getDegrees();
+                try {
+                    BufferedImage myPicture = ImageIO.read(getClass().getResource(phantoms.get(j).getImg()));
+                    phantomsImg.get(j).setIcon(new ImageIcon(rotate(myPicture,rot)));
+                } catch (IOException ex) {
+                    Logger.getLogger(FreakyLand.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+               }
                 phantomsImg.get(j).setLocation(phantoms.get(j).getPosX(), phantoms.get(j).getPosY());
                 if(phantomsImg.get(j).getY() >= HEIGHT){
                     phantomsImg.remove(j);
                     phantoms.remove(j);
                 }
+                //validate();
+                
             }
         }
         i=i+1;
+    }
+    
+    private BufferedImage rotate(BufferedImage in, int degrees){
+        BufferedImage bufferedImage;
+        AffineTransform tx = new AffineTransform();
+        tx.rotate(Math.toRadians(degrees), in.getWidth(), in.getHeight());
+        AffineTransformOp op = new AffineTransformOp(tx,
+        AffineTransformOp.TYPE_BILINEAR);
+        bufferedImage = op.filter(in, null);
+        return bufferedImage;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
 }

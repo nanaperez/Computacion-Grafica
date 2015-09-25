@@ -14,7 +14,7 @@ public abstract class  Figura {
     protected int sizeX;      // Size in pixels in X direction.
     protected int sizeY;      // Size in pixels in Y direction.
     protected String imgIcon; // Source for the image.
-
+    protected int degrees;
     public int getPosX() {
         return posX;
     }
@@ -53,6 +53,14 @@ public abstract class  Figura {
 
     public void setImgIcon(String imgIcon) {
         this.imgIcon = imgIcon;
+    }
+
+    public int getDegrees() {
+        return degrees;
+    }
+
+    public void setDegrees(int degrees) {
+        this.degrees = degrees;
     }
     
 }

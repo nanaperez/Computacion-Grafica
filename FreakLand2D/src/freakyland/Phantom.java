@@ -15,6 +15,7 @@ public class Phantom extends Figura {
         super();
         sizeX = 100;
         sizeY = 100;
+        degrees = 0;
     }
     
     public String randomizePhantom(){
