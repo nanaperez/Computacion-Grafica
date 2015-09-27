@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package freakyland.gui;
 
 import freakyland.Player;
@@ -300,6 +294,7 @@ BufferedImage resizedImage = new BufferedImage(biggerWidth, biggerHeight, type);
                }
                 phantomsImg.get(j).setLocation(phantoms.get(j).getPosX(), phantoms.get(j).getPosY());
                 if(phantomsImg.get(j).getY() >= HEIGHT){
+                    this.remove(phantomsImg.get(j));
                     phantomsImg.remove(j);
                     phantoms.remove(j);
                 }
