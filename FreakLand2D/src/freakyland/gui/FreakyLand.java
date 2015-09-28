@@ -141,8 +141,8 @@ public class FreakyLand extends javax.swing.JPanel implements java.awt.event.Key
        for(int i = 0; i<phantomsImg.size();i++){
            phantomPosX = phantoms.get(i).getPosX();
            phantomPosY = phantoms.get(i).getPosY();
-           if(Math.abs(playerPosX - phantomPosX)<=player.getHitBoxX()-30
-                   && Math.abs(playerPosY - phantomPosY)<=player.getHitBoxY()-50){
+           if(Math.abs(playerPosX - phantomPosX)<=player.getHitBoxX()
+                   && Math.abs(playerPosY - phantomPosY)<=player.getHitBoxY() - 50){
                final JLabel phantomTemp = phantomsImg.get(i);
                if(phantoms.get(i).getType()==phantomTrap.getType()){
                    try {
