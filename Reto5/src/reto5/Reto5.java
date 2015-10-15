@@ -6,6 +6,7 @@
 package reto5;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -40,13 +41,20 @@ public class Reto5 extends JPanel implements KeyListener {
        this.setBackground(Color.WHITE);
        this.setFocusable(true);
        this.addKeyListener(this);
+       //getPoints();
     }
     
-    
+    private void getPoints(){
+        for(int i = 0; i < arr.length;i++){
+            for(int j = 0; j < arr[0].length;j++){
+                //this.arr[]
+            }
+        }
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("You pressed"+e.getKeyChar());
+        System.out.println("You pressed "+e.getKeyChar());
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -58,6 +66,12 @@ public class Reto5 extends JPanel implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g); 
+        //To change body of generated methods, choose Tools | Templates.
     }
     
     
