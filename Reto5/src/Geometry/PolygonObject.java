@@ -8,6 +8,7 @@ package Geometry;
 
 import java.util.ArrayList;
 import Math.Matrix4x4;
+import reto5.Reto5;
 
 /**
  * This class handles a collection of edges that form the object to be drawn
@@ -37,7 +38,7 @@ public class PolygonObject {
      * Draw the lines composing the polygon
      * @param dc JPanel to draw the object on
      */
-    public void drawObject(DibujarCasita dc) {
+    public void drawObject(Reto5 dc) {
         for(Edge edge: edges) {
             drawOneLine(dc, edge);
         }
@@ -48,7 +49,7 @@ public class PolygonObject {
      * @param dc JPanel to draw on
      * @param edge Edge to draw
      */
-    public void drawOneLine(DibujarCasita dc, Edge edge) {
+    public void drawOneLine(Reto5 dc, Edge edge) {
         int x1 = (int)edge.start.getX();
         int y1 = (int)edge.start.getY();
         int x2 = (int)edge.end.getX();

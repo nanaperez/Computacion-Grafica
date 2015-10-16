@@ -70,7 +70,7 @@ public class DibujarCasita extends JPanel  implements KeyListener{
 
         // Draw the polygon object
         g2d.setColor(Color.BLUE);
-        po.drawObject(this);
+        //po.drawObject(this);
         
     }
 
