@@ -5,20 +5,14 @@
  */
 package reto5;
 
-import Geometry.DibujarCasita;
 import Geometry.Edge;
 import Geometry.PolygonObject;
-import Math.UVNMatrix;
 import Math.Vector4;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 import javax.swing.*;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
@@ -29,7 +23,9 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 public class Reto5 extends JPanel implements KeyListener {
     public static final int panelWidth = 600;
     public static final int panelHeight = 400;
-    
+    private int mvVert = 0, mvHor = 0;
+    private static PolygonObject op;
+    private static final int chngValue = 10;
     /**
      * @param args the command line arguments
      */
@@ -48,8 +44,9 @@ public class Reto5 extends JPanel implements KeyListener {
         int x2 = panel.getPoints("x2");
         int y2 = panel.getPoints("y2");
         int z2 = panel.getPoints("z2");
-        PolygonObject op = panel.buildRect3d(x1, y1, z1, x2, y2, z2);
-        op.drawObject(null);
+        op = panel.buildRect3d(x1, y1, z1, x2, y2, z2);
+        op.drawObject(panel);
+        panel.fillObject(x1, y1, x2, y2);
         // TODO code application logic here
     }
      public void drawOneLine(int x1, int y1, int x2, int y2) {
@@ -74,11 +71,21 @@ public class Reto5 extends JPanel implements KeyListener {
         }
         return num;
     }
+    
+    private void fillObject(int x1, int y1, int x2, int y2){
+         Graphics2D g2d = (Graphics2D) this.getGraphics();
+        
+        for(int i = x1; i < x2;i++){
+            for(int j = y1; j < y2;j++){
+                g2d.drawLine(i, j, i, j);
+            }
+        }
+    }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("You pressed "+e.getKeyChar());
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+//To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -107,54 +114,31 @@ public class Reto5 extends JPanel implements KeyListener {
      * @return 
      */
     public PolygonObject buildRect3d(int x1, int y1, int z1, int x2, int y2, int z2){ 
-        int x3 = x1;
+        int x3 = x2;
         int y3 = y1;
-        int z3 = z2;
+        int z3 = z1;
         int x4 = x1;
         int y4 = y2;
-        int z4 = z1;
-        int x5 = x1;
-        int y5 = y2;
-        int z5 = z2;
-        int x6 = x2;
-        int y6 = y1;
-        int z6 = z1;
-        int x7 = x2;
-        int y7 = y1;
-        int z7 = z2;
-        int x8 = x2;
-        int y8 = y2;
-        int z8 = z1;
+        int z4 = z2;
+        
         PolygonObject po = new PolygonObject();
         // Read the number of vertices
-        int numVertices = 8;
+        int numVertices = 4;
         Vector4[] vertexArray = new Vector4[numVertices];
         vertexArray[0] = new Vector4(x1, y1, z1);
         vertexArray[1] = new Vector4(x2, y2, z2);
         vertexArray[2] = new Vector4(x3, y3, z3);
         vertexArray[3] = new Vector4(x4, y4, z4);
-        vertexArray[4] = new Vector4(x5, y5, z5);
-        vertexArray[5] = new Vector4(x6, y6, z6);
-        vertexArray[6] = new Vector4(x7, y7, z7);
-        vertexArray[7] = new Vector4(x8, y8, z8);
         //edges
         po.addEdge(new Edge(vertexArray[0], vertexArray[2]));
         po.addEdge(new Edge(vertexArray[0], vertexArray[3]));
-        po.addEdge(new Edge(vertexArray[0], vertexArray[5]));
-        po.addEdge(new Edge(vertexArray[1], vertexArray[7]));
-        po.addEdge(new Edge(vertexArray[1], vertexArray[4]));
-        po.addEdge(new Edge(vertexArray[1], vertexArray[6]));
-        po.addEdge(new Edge(vertexArray[2], vertexArray[4]));
-        po.addEdge(new Edge(vertexArray[2], vertexArray[6]));
-        po.addEdge(new Edge(vertexArray[3], vertexArray[4]));
-        po.addEdge(new Edge(vertexArray[3], vertexArray[7]));
-        po.addEdge(new Edge(vertexArray[4], vertexArray[3]));
-        po.addEdge(new Edge(vertexArray[5], vertexArray[6]));
-        po.addEdge(new Edge(vertexArray[5], vertexArray[6]));
+        po.addEdge(new Edge(vertexArray[1], vertexArray[2]));
+        po.addEdge(new Edge(vertexArray[1], vertexArray[3]));
         return po;
     }
-    public void drawPolygon(Graphics2D gr){
-        
+
+    private void cleanWindow(){
+        Graphics2D gr = (Graphics2D) this.getGraphics();
+        gr.clearRect(0, 0, this.getWidth(), this.getHeight());
     }
-    
 }

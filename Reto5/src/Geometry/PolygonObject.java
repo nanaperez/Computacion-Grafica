@@ -43,6 +43,8 @@ public class PolygonObject {
             drawOneLine(dc, edge);
         }
     }
+    
+
 
     /**
      * Ask the JPanel to draw one of the edges composing the object
