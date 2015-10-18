@@ -60,5 +60,27 @@ public class PaintersAlgorithm extends JPanel{
             Logger.getLogger(PaintersAlgorithm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void managePainter(){
+        if(){
+            
+        }else if(){
+            
+        }else{
+           //conflict
+        }
+    }
+    public boolean painter(Rectangle r1, Rectangle r2){
+        
+    }
+    public boolean case1(double z1, double z2){
+        if(z1 < z2){
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean case2(Rectangle r1, Rectangle r2){
+        return r1.intersect(r2);
+    }
     
 }

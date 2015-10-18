@@ -9,12 +9,13 @@ import Math.Point;
 import Math.Plane;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JPanel;
-
+import java.awt.geom.Rectangle2D.Double;
 /**
  *
  * @author htrefftz
@@ -58,7 +59,15 @@ public class Rectangle {
         // Now create p4, the final point
         p4 = new Point(xMin, yMax, z4);
     }
-
+    public boolean intersect(Rectangle two){
+        Rectangle2D.Double one = new Rectangle2D.Double(this.p1.getX(),
+                this.p1.getY(),this.p2.getX() - this.p1.getX(),
+                this.p3.getY() - this.p1.getY());
+         Rectangle2D.Double twot = new Rectangle2D.Double(two.p1.getX(),
+                two.p1.getY(),two.p2.getX() - two.p1.getX(),
+                two.p3.getY() - two.p1.getY());
+        return one.intersects(twot);
+    }
     @Override
     public String toString() {
         return "Rectangle{" + "p1=" + p1 + ", p2=" + p2 + ", p3=" + p3 + ", p4=" + p4 + ", plane=" + plane + '}';
@@ -81,7 +90,7 @@ public class Rectangle {
         fr.setDefaultCloseOperation(EXIT_ON_CLOSE);
         fr.setResizable(false);
         fr.setVisible(true);
-        
+   
         Graphics2D gr = (Graphics2D)panel.getGraphics();
         rect.paintRectangle(gr,Color.red);
     }
