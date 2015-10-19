@@ -77,9 +77,9 @@ public class PaintersAlgorithm extends JPanel{
                 yMinr2 = n4;
                 yMaxr2 = n3;
             }
-            int n5 = panel.randomizeCoords();
-            int n6 = panel.randomizeCoords();
-            int n7 = panel.randomizeCoords();
+            int n5 = panel.randomizeCoords(true);
+            int n6 = panel.randomizeCoords(true);
+            int n7 = panel.randomizeCoords(true);
             Rectangle rect2 = new Rectangle(xMinr2,xMaxr2,yMinr2,yMaxr2,n5,n6,n7);
             panel.managePainter(rect, rect2, gr, Color.black, Color.blue);
             // TODO code application logic herePaintersAlgorithm
@@ -90,7 +90,11 @@ public class PaintersAlgorithm extends JPanel{
     
     public int randomizeCoords(){
         Random num = new Random();
-        return (num.nextInt(this.getWidth())/2);
+        return (num.nextInt(this.getWidth()));
+    }
+     public int randomizeCoords(boolean t){
+        Random num = new Random();
+        return -(num.nextInt(600));
     }
     public void managePainter(Rectangle r1, Rectangle r2,Graphics2D gr, Color color1, Color color2){
         if(painter(r1,r2)){
