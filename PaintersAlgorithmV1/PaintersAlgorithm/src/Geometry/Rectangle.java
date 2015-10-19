@@ -32,6 +32,51 @@ public class Rectangle {
     // plane. The equation is formed with p1, p2, and p3
     Plane plane;
     int distance = 100;
+    Point arr[];
+
+    public Point getP1() {
+        return p1;
+    }
+
+    public Point getP2() {
+        return p2;
+    }
+
+    public Point getP3() {
+        return p3;
+    }
+
+    public Point getP4() {
+        return p4;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public Point[] getArr() {
+        return arr;
+    }
+    
+    public double getZMax(){
+        double zMax = p1.getZ();
+        for(Point arr1:arr){
+            if(arr1.getZ()>zMax){
+                zMax = arr1.getZ();
+            }
+        }
+        return zMax;
+    }
+    
+     public double getZMin(){
+        double zmin = p1.getZ();
+        for(Point arr1:arr){
+            if(arr1.getZ()<zmin){
+                zmin = arr1.getZ();
+            }
+        }
+        return zmin;
+    }
     /**
      * Axis-aligned rectangle. 
      * Corners are P1, P2, P3 and P4.
@@ -58,6 +103,11 @@ public class Rectangle {
         double z4 = plane.evaluateZ(xMin, yMax);
         // Now create p4, the final point
         p4 = new Point(xMin, yMax, z4);
+        arr = new Point[4];
+        arr[0] = p1;
+        arr[1] = p2;
+        arr[2] = p3;
+        arr[3] = p4;
     }
     public boolean intersect(Rectangle two){
         Rectangle2D.Double one = new Rectangle2D.Double(this.p1.getX(),
@@ -92,7 +142,7 @@ public class Rectangle {
         fr.setVisible(true);
    
         Graphics2D gr = (Graphics2D)panel.getGraphics();
-        rect.paintRectangle(gr,Color.red);
+        rect.paintBorder(gr,Color.red);
     }
     
     public void paintRectangle(Graphics2D gr, Color col){
@@ -112,4 +162,36 @@ public class Rectangle {
         long end = System.currentTimeMillis();
         System.out.println(""+(end-init));
     }
+    public void paintBorder(Graphics2D gr, Color col){
+        gr.setColor(col);
+        boolean sw1 = true, sw2 = true;
+        int nX = (int)Math.round(this.p2.getX()-1);
+        int nY = (int)Math.round(this.p3.getY()-1);
+         for(int i = (int)this.p1.getX(); i < (int)this.p2.getX();i++){
+             sw2 = true;
+            for(int j = (int)this.p1.getY(); j < (int)this.p3.getY();j++){
+                try {
+                    int xp = Math.abs((int)(i*(distance/this.plane.evaluateZ(i, j))));
+                    int yp = Math.abs((int)(j*(distance/this.plane.evaluateZ(i, j))));
+                    if(sw1 || i == nX || sw2 || j == nY){
+                        gr.drawLine(xp, yp, xp, yp);
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(Rectangle.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                sw2 = false;
+            }
+            sw1 = false;
+        }
+        
+    }
+    
+    public Point[] getPointsArray(){
+        return arr;
+    }
+
+    public Plane getPlane() {
+        return plane;
+    }
+    
 }

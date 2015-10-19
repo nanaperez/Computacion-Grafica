@@ -39,7 +39,9 @@ public class Plane {
         if(DEBUG)
             System.out.println(this);
     }
-    
+    public double evaluatePointInPlane(double x, double y, double z){
+        return this.a*x + this.b*y + this.c*z + d;
+    }
     /**
      * Given the x and y coordinates of a point on the plane, find the z coordinate
      * @param x x coordinate
