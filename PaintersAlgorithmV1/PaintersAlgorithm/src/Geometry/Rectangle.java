@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Geometry;
 
 import Math.Point;
@@ -15,10 +10,9 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JPanel;
-import java.awt.geom.Rectangle2D.Double;
 /**
  *
- * @author htrefftz
+ * @author htrefftz edited by: Sebastian López, Alejandra Pérez, Juan Manuel Mejía 
  */
 public class Rectangle {
     // lower left
@@ -140,14 +134,12 @@ public class Rectangle {
         fr.setDefaultCloseOperation(EXIT_ON_CLOSE);
         fr.setResizable(false);
         fr.setVisible(true);
-   
         Graphics2D gr = (Graphics2D)panel.getGraphics();
         rect.paintBorder(gr,Color.red);
     }
     
     public void paintRectangle(Graphics2D gr, Color col){
         gr.setColor(col);
-        long init = System.currentTimeMillis();
         for(int i = (int)this.p1.getX(); i < (int)this.p2.getX();i++){
             for(int j = (int)this.p1.getY(); j < (int)this.p3.getY();j++){
                 try {
@@ -159,8 +151,6 @@ public class Rectangle {
                 }
             }
         }
-        long end = System.currentTimeMillis();
-        System.out.println(""+(end-init));
     }
     public void paintBorder(Graphics2D gr, Color col){
         gr.setColor(col);

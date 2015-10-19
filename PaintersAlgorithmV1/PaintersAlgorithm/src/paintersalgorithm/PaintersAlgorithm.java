@@ -24,7 +24,6 @@ import javax.swing.JPanel;
  * @author htrefftz
  */
 public class PaintersAlgorithm extends JPanel{
-    private Rectangle rec;
     public PaintersAlgorithm(boolean isDoubleBuffered) {
         super(isDoubleBuffered);
     }
@@ -146,12 +145,10 @@ public class PaintersAlgorithm extends JPanel{
         for (Point arr1 : arr) {
             double evaluation = r2.getPlane().evaluatePointInPlane(arr1.getX(), 
                      arr1.getY(), arr1.getZ());
-            System.out.println("res eval:"+evaluation);
             if (evaluation < 0){
                 return false;
             }
         }
-        System.out.println("está por debajo");
         return true;
     }
     
@@ -160,12 +157,10 @@ public class PaintersAlgorithm extends JPanel{
         for (Point arr1 : arr) {
             double evaluation = r2.getPlane().evaluatePointInPlane(arr1.getX(), 
                      arr1.getY(), arr1.getZ());
-            System.out.println("res eval:"+evaluation);
             if (evaluation > 0){
                 return false;
             }
         }
-        System.out.println("está por encima");
         return true;
     }
     

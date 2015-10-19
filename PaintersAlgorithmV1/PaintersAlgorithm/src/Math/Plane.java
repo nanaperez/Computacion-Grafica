@@ -5,9 +5,6 @@
  */
 package Math;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 /**
  *
  * @author htrefftz
@@ -60,14 +57,5 @@ public class Plane {
     @Override
     public String toString() {
         return "Plane{" + "a=" + a + ", b=" + b + ", c=" + c + ", d=" + d + '}';
-    }
-    
-    public static void main(String [] args) throws Exception {
-        Point p1 = new Point(1, 0, 0);
-        Point p2 = new Point(0, 1, 0);
-        Point p3 = new Point(0, 0, 1);
-        Plane plane = new Plane(p1, p2, p3);
-        System.out.println(plane.evaluateZ(0.25d, 0.25d));
-
     }
 }
