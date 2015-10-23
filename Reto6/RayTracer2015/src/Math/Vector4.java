@@ -120,7 +120,18 @@ public class Vector4 {
         vector[1] /= mag;
         vector[2] /= mag;
     }
-    
+    /**
+     * 
+     * @param scalar
+     * @param n
+     * @return 
+     */
+    public static Vector4 multiply(double scalar, Vector4 n){
+        double x =  n.vector[0]* scalar;
+        double y = n.vector[1] * scalar;
+        double z = n.vector[2] * scalar;
+        return new Vector4(x,y,z);
+    }
     /**
      * Creates a new vector based on an existing vector
      * @param vector existing vector
@@ -193,5 +204,40 @@ public class Vector4 {
             s += vector[i] + " ";
         }
         return s;
+    }
+    /**
+     * Method to calculte the normal
+     * @param p Point x1
+     * @param center Point x2
+     * @return Vector4 normal
+     */
+    public static Vector4 computeNormal(Point p, Point center) {
+
+        Vector4 normal = new Vector4(center, p);
+
+        normal.normalize();
+
+        return normal;
+
+    }
+    
+    /**
+     * Mathod to get Vector reflection
+     * @param u
+     * @param n
+     * @return 
+     */
+    public static Vector4 reflection(Vector4 u, Vector4 n) {       
+        n.normalize();        
+        double scalar = - 2 * Vector4.dotProduct(u, n);        
+        Vector4 res = Vector4.add(u, Vector4.multiply(scalar, n));        
+        return res;    
+    }
+    
+    public static Vector4 add(Vector4 u, Vector4 v){
+        double x = u.get(0) + v.get(0);
+        double y = u.get(1) + v.get(1);
+        double z = u.get(2) + v.get(2);
+        return new Vector4(x,y,z);
     }
 }

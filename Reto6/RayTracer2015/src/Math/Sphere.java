@@ -88,4 +88,13 @@ public class Sphere {
         Ray ray3 = new Ray(new Point(100, 0, 0), new Point(100, 0, -10));
         System.out.println(Sphere.intersect(sphere1, ray3));
     }
+
+    public Point getCenter() {
+        return center;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+    
 }

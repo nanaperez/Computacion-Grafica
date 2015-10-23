@@ -5,10 +5,13 @@
  */
 package Scene;
 
+import Math.Point;
 import java.util.ArrayList;
 import Math.Sphere;
 import Math.Ray;
 import Math.Solutions;
+import java.util.TreeSet;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -23,6 +26,7 @@ public class Scene {
     static ArrayList<Sphere> spheres = new ArrayList<>();
     // Bacground color
     static final Colour BACKGROUNDCOLOR = new Colour(0.7, 0.7, 0.9);
+    private static TreeSet<Sphere> tree = new TreeSet();
     
     /**
      * Set the ambient light in the scene
@@ -84,9 +88,20 @@ public class Scene {
             }
             // Compute the reflection
             if(Kr != 0) {
-                // create the reflecion ray,
-                // send the ray to intersect with objects in the scene (Scene.intersectRay(reflectedRay))
+                    Solutions s = Sphere.intersect(closest, ray);
+                    if(s.getNumSolutions() > 1) {
+                        double t2 = s.getT2();
+                        
+                    // create the reflecion ray,
+                    //Ray reflectedRay = new Ray();
+                    // send the ray to intersect with objects in the scene (Scene.intersectRay(reflectedRay))
+                        if(!tree.contains(closest)){
+                       // Scene.intersectRay(reflectedRay);
+                        }
+                    }
+                
                 // (this is where recursion takes place)
+                
                 // multiply the color by the corresponding Weight (Kr) 
                 // and add the color to acum
             }
@@ -94,4 +109,5 @@ public class Scene {
         }
         return BACKGROUNDCOLOR;
     }
+
 }
