@@ -24,14 +24,5 @@ public class PointLight {
         this.point = point;
         this.color = color;
     }
-
-    public Point getPoint() {
-        return point;
-    }
-
-    public Colour getColor() {
-        return color;
-    }
-    
         
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import Math.Sphere;
 import Math.Ray;
 import Math.Solutions;
+import Math.Vector4;
 import java.util.TreeSet;
 import javafx.scene.paint.Color;
 
@@ -90,14 +91,18 @@ public class Scene {
             if(Kr != 0) {
                     Solutions s = Sphere.intersect(closest, ray);
                     if(s.getNumSolutions() > 1) {
-                        double t2 = s.getT2();
-                        
-                    // create the reflecion ray,
-                    //Ray reflectedRay = new Ray();
+                        double t2 = s.getT1();
+                        Point end = ray.evaluate(t2);
+                        // create the reflecion ray,
+                        Vector4 normal = Vector4.computeNormal(end, closest.getCenter());
+                        Vector4 r = Vector4.reflection(ray.getU(), normal);
+                        Ray reflectedRay = new Ray(end,r);
                     // send the ray to intersect with objects in the scene (Scene.intersectRay(reflectedRay))
-                        if(!tree.contains(closest)){
-                       // Scene.intersectRay(reflectedRay);
-                        }
+                        //if(!tree.contains(closest)){
+                          Colour colour = Scene.intersectRay(reflectedRay);
+                          colour = Colour.multiply(colour, Kr);
+                          acum = Colour.add(acum, colour);
+                        //}
                     }
                 
                 // (this is where recursion takes place)

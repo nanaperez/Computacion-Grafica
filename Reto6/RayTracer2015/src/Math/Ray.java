@@ -52,5 +52,9 @@ public class Ray {
         return "Ray{" + "p0=" + p0 + ", u=" + u + '}';
     }
 
+    public Vector4 getU() {
+        return u;
+    }
+
     
 }
