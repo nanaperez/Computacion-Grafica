@@ -139,6 +139,7 @@ public class Rectangle {
     }
     
     public void paintRectangle(Graphics2D gr, Color col){
+        System.out.println(this.toString());
         gr.setColor(col);
         for(int i = (int)this.p1.getX(); i < (int)this.p2.getX();i++){
             for(int j = (int)this.p1.getY(); j < (int)this.p3.getY();j++){

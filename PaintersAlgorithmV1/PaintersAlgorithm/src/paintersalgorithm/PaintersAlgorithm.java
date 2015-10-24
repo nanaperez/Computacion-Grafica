@@ -99,10 +99,12 @@ public class PaintersAlgorithm extends JPanel{
     public void managePainter(Rectangle r1, Rectangle r2,Graphics2D gr, Color color1, Color color2){
         if(painter(r1,r2)){
             //Paint first r1
+            System.out.println("r1");
             r1.paintRectangle(gr, color1);
             r2.paintRectangle(gr, color2);
         }else if(painter(r2,r1)){
             //Paint first r2
+            System.out.println("r2");
             r2.paintRectangle(gr, color1);
             r1.paintRectangle(gr, color2);
         }else{
@@ -135,6 +137,7 @@ public class PaintersAlgorithm extends JPanel{
      */
     public boolean case1(double z1, double z2){
         if(z1 < z2){
+            System.out.println("caso1");
             return true;
         }
         return false;
@@ -145,18 +148,7 @@ public class PaintersAlgorithm extends JPanel{
     }
     
     public boolean case3(Rectangle r1, Rectangle r2){
-        Point arr[] =  r1.getPointsArray();
-        for (Point arr1 : arr) {
-            double evaluation = r2.getPlane().evaluatePointInPlane(arr1.getX(), 
-                     arr1.getY(), arr1.getZ());
-            if (evaluation < 0){
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    public boolean case4(Rectangle r1, Rectangle r2){
+        
         Point arr[] =  r1.getPointsArray();
         for (Point arr1 : arr) {
             double evaluation = r2.getPlane().evaluatePointInPlane(arr1.getX(), 
@@ -165,6 +157,20 @@ public class PaintersAlgorithm extends JPanel{
                 return false;
             }
         }
+        System.out.println("caso3");
+        return true;
+    }
+    
+    public boolean case4(Rectangle r1, Rectangle r2){
+        Point arr[] =  r2.getPointsArray();
+        for (Point arr2 : arr) {
+            double evaluation = r1.getPlane().evaluatePointInPlane(arr2.getX(), 
+                     arr2.getY(), arr2.getZ());
+            if (evaluation < 0){
+                return false;
+            }
+        }
+        System.out.println("caso4");
         return true;
     }
     
