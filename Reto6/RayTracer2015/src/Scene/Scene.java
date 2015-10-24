@@ -26,7 +26,7 @@ public class Scene {
     // Several Spheres
     static ArrayList<Sphere> spheres = new ArrayList<>();
     // Bacground color
-    static final Colour BACKGROUNDCOLOR = new Colour(0.7, 0.7, 0.9);
+    static final Colour BACKGROUNDCOLOR = new Colour(0.7, 0.7, 0.7);
     private static TreeSet<Sphere> tree = new TreeSet();
     
     /**

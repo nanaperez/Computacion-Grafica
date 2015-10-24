@@ -37,7 +37,7 @@ public class Main extends JPanel {
      * Could be read from a text file
      */
     public void createScene() {
-         AmbientLight al = new AmbientLight(new Colour(.2, .2, .2));
+          AmbientLight al = new AmbientLight(new Colour(.2, .2, .2));
         Scene.setAmbientLight(al);
         
         PointLight pl1 = new PointLight(new Point(-100, 100, 0), new Colour(1, 1, 1));
@@ -48,11 +48,11 @@ public class Main extends JPanel {
         // A red reflective sphere
         double Ka = 0.2;        // ambient
         double Kd = 0.8;        // difuse
-        double Ks = 0.8;          // specular
+        double Ks = 0.5;          // specular
         int n = 16;
         Colour color = new Colour(1, 0, 0);     // object’s color
-        double Ko = .3;          // Weight of this object’s color
-        double Kr = .7;          // Weight of the reflected color
+        double Ko = .8;          // Weight of this object’s color
+        double Kr = .2;          // Weight of the reflected color
         double Kt = 0;          // Weight of the refracted color
         Material material1 = new Material(Ka, Kd, Ks, n, color, Ko, Kr, Kt);
         
@@ -60,19 +60,17 @@ public class Main extends JPanel {
         Scene.addSphere(sp1);
         // A yellow non-reflective sphere
         Ka = 0.2;        // ambient
-        Kd = 0.8;        // difuse
-        Ks = 0.0;          // specular
+        Kd = 0.6;        // difuse
+        Ks = 0.2;          // specular
         n = 16;
         color = new Colour(1, 1, 0);     // object’s color
-        Ko = 1;          // Weight of this object’s color
-        Kr = 0;          // Weight of the reflected color
+        Ko = .7;          // Weight of this object’s color
+        Kr = .3;          // Weight of the reflected color
         Kt = 0;          // Weight of the refracted color
         Material material2 = new Material(Ka, Kd, Ks, n, color, Ko, Kr, Kt);
         
         Sphere sp2 = new Sphere(new Point(+25, 0, -100), 20, material2);
         Scene.addSphere(sp2);
-        
-        
     }
     
     public void paintComponent(Graphics g) {

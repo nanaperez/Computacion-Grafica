@@ -234,10 +234,24 @@ public class Vector4 {
         return res;    
     }
     
+    public static Vector4 specular(Vector4 l, Vector4 n){
+        Vector4 n2 = multiply(2,n);
+        double scalar = dotProduct(n2,l);
+        n2 = multiply(scalar,n2);
+        n2 = minus(n2,l);
+        return n2;
+    }
+    
     public static Vector4 add(Vector4 u, Vector4 v){
         double x = u.get(0) + v.get(0);
         double y = u.get(1) + v.get(1);
         double z = u.get(2) + v.get(2);
+        return new Vector4(x,y,z);
+    }
+     public static Vector4 minus(Vector4 u, Vector4 v){
+        double x = u.get(0) - v.get(0);
+        double y = u.get(1) - v.get(1);
+        double z = u.get(2) - v.get(2);
         return new Vector4(x,y,z);
     }
 }
