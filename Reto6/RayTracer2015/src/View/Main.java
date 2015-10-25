@@ -43,7 +43,7 @@ public class Main extends JPanel {
         PointLight pl1 = new PointLight(new Point(-100, 100, 0), new Colour(1, 1, 1));
         PointLight pl2 = new PointLight(new Point(+100, 100, 0), new Colour(1, 1, 1));
         Scene.addPointLight(pl1);
-        //Scene.addPointLight(pl2);
+        Scene.addPointLight(pl2);
         
         // A red reflective sphere
         double Ka = 0.2;        // ambient
